@@ -117,8 +117,9 @@ if __name__ == "__main__":
 
 Spectra are automatically saved to `dataset/circle/spectrum/` as CSV files containing:
 - Wavelength data
-- Transmission coefficients (Trans_xx, Trans_xy, Trans_yx, Trans_yy, Trans_RL, Trans_RR, Trans_LR, Trans_LL)
-- Reflection coefficients (Refl_xx, Refl_xy, Refl_yx, Refl_yy, Refl_RL, Refl_RR, Refl_LR, Refl_LL)
+- Transmission (Trans_xx, Trans_xy, Trans_yx, Trans_yy, Trans_RL, Trans_RR, Trans_LR, Trans_LL)
+- Reflection (Refl_xx, Refl_xy, Refl_yx, Refl_yy, Refl_RL, Refl_RR, Refl_LR, Refl_LL)
+polarization: the input and output polarization of light ((output,input) : 'xx' / 'yx' / 'xy' / 'yy' / 'RR' / 'RL' / 'RL' / 'LL'
 
 ## Configuration
 
