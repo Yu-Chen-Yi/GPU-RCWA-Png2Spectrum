@@ -5,8 +5,8 @@ import os
 import tqdm
 INPUT_FolderPath = r'dataset\circle\pattern'
 DEVICE = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
-WAVELENGTH_RANGE = [400., 1000.]
-WAVELENGTH_STEP = 2.
+WAVELENGTH_RANGE = [401., 1000.]
+WAVELENGTH_STEP = 5.
 HARMONIC_ORDER = 7
 PERIOD = 400.
 PATTERN_THK = 100.

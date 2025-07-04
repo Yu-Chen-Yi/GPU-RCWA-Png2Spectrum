@@ -11,7 +11,7 @@ class RCWA:
         self,
         device= torch.device('cpu'),
         geo_dtype = torch.float32,
-        wavelength_range = [400., 1000.],
+        wavelength_range = [401., 1000.],
         wavelength_step = 5.,
         pattern_path='png_path',
         harmonic_order=7,
@@ -80,8 +80,8 @@ class RCWA:
         rRR = torch.zeros(len(wavelength_range), dtype=self.sim_dtype,device=self.device)
         rLR = torch.zeros(len(wavelength_range), dtype=self.sim_dtype,device=self.device)
         rLL = torch.zeros(len(wavelength_range), dtype=self.sim_dtype,device=self.device)
-        for i, lamb0 in enumerate(wavelength_range):
-            lamb0 = torch.tensor(lamb0, dtype=self.geo_dtype,device=self.device)
+        for i, lamb in enumerate(wavelength_range):
+            lamb0 = torch.tensor(lamb, dtype=self.geo_dtype,device=self.device)
             input_eps = Materials.Material.forward(wavelength=lamb0, name=self.input_material)**2
             output_eps = Materials.Material.forward(wavelength=lamb0, name=self.output_material)**2
             pattern_A_eps = Materials.Material.forward(wavelength=lamb0, name=self.pattern_A_material)**2
@@ -143,22 +143,22 @@ class RCWA:
         Refl_LL = torch.abs(rLL)**2
         df = pd.DataFrame({
             'wavelength': wavelength_range,
-            'Trans_xx': Trans_xx,
-            'Trans_xy': Trans_xy,
-            'Trans_yx': Trans_yx,
-            'Trans_yy': Trans_yy,
-            'Trans_RL': Trans_RL,
-            'Trans_RR': Trans_RR,
-            'Trans_LR': Trans_LR,
-            'Trans_LL': Trans_LL,
-            'Refl_xx': Refl_xx,
-            'Refl_xy': Refl_xy,
-            'Refl_yx': Refl_yx,
-            'Refl_yy': Refl_yy,
-            'Refl_RL': Refl_RL,
-            'Refl_RR': Refl_RR,
-            'Refl_LR': Refl_LR,
-            'Refl_LL': Refl_LL
+            'Trans_xx': Trans_xx.cpu().numpy(),
+            'Trans_xy': Trans_xy.cpu().numpy(),
+            'Trans_yx': Trans_yx.cpu().numpy(),
+            'Trans_yy': Trans_yy.cpu().numpy(),
+            'Trans_RL': Trans_RL.cpu().numpy(),
+            'Trans_RR': Trans_RR.cpu().numpy(),
+            'Trans_LR': Trans_LR.cpu().numpy(),
+            'Trans_LL': Trans_LL.cpu().numpy(),
+            'Refl_xx': Refl_xx.cpu().numpy(),
+            'Refl_xy': Refl_xy.cpu().numpy(),
+            'Refl_yx': Refl_yx.cpu().numpy(),
+            'Refl_yy': Refl_yy.cpu().numpy(),
+            'Refl_RL': Refl_RL.cpu().numpy(),
+            'Refl_RR': Refl_RR.cpu().numpy(),
+            'Refl_LR': Refl_LR.cpu().numpy(),
+            'Refl_LL': Refl_LL.cpu().numpy()
         })
         #是self.pattern_path的前面的資料夾
         shape_dir = os.path.dirname(self.pattern_path).split('\\')[:-1]
