@@ -15,8 +15,9 @@ pixel_size = X_Period / X_pixel_number  # Pixel size in nm (assuming square pixe
 width_nm = np.linspace(50, 150, 10)
 height_nm = np.linspace(50, 150, 10)
 rotation_angle = np.linspace(0., 180., 10)
+
 # Directory setup for saving patterns and parameters
-shape_dir = r"dataset\rectangle"
+shape_dir = r"dataset\rhombus"
 pattern_dir = os.path.join(shape_dir, 'pattern')
 os.makedirs(pattern_dir, exist_ok=True)
 
@@ -25,8 +26,8 @@ for idx_width, width in enumerate(width_nm):
     for idx_height, height in enumerate(height_nm):
         for idx_rotation, rotation in enumerate(rotation_angle):
             # Set the center of the circle
-            rectangle_center_x = X_Period / 2
-            rectangle_center_y = Y_Period / 2
+            rhombus_center_x = X_Period / 2
+            rhombus_center_y = Y_Period / 2
             
             # Create geometry object for the pattern
             geometry = torcwa.geometry(
@@ -40,9 +41,9 @@ for idx_width, width in enumerate(width_nm):
             )
             geometry.grid()
             # Generate a circle pattern (0 inside, 1 outside or vice versa)
-            layer_0 = geometry.rectangle(
-                Cx = rectangle_center_x, 
-                Cy = rectangle_center_y, 
+            layer_0 = geometry.rhombus(
+                Cx = rhombus_center_x, 
+                Cy = rhombus_center_y, 
                 Wx = width, 
                 Wy = height, 
                 theta = rotation/180.*np.pi)
